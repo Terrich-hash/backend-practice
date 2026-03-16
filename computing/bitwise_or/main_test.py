@@ -1,27 +1,21 @@
 from main import *
 
 run_cases = [
-    (get_create_bits, 0b1000, 0b1010, True),
-    (get_review_bits, 0b0100, 0b1001, False),
-    (get_delete_bits, 0b0010, 0b0110, True),
-    (get_edit_bits, 0b0001, 0b1110, False),
+    (0b0001, 0b0010, 0b0001, 0b1011, 0b1011),
 ]
 
 submit_cases = run_cases + [
-    (get_create_bits, 0b1000, 0b0111, False),
-    (get_review_bits, 0b0100, 0b0110, True),
-    (get_delete_bits, 0b0010, 0b1101, False),
-    (get_edit_bits, 0b0001, 0b0011, True),
+    (0b0000, 0b0000, 0b0000, 0b1011, 0b1011),
+    (0b1001, 0b0010, 0b1101, 0b1011, 0b1111),
 ]
 
 
-def test(func, perm_bit, user_permissions, expected_output):
+def test(input1, input2, input3, input4, expected_output):
     print("---------------------------------")
-    print(f"Testing {func.__name__}")
-    print(f"Inputs: {user_permissions:04b}")
-    print(f"Expecting: {expected_output}")
-    result = func(user_permissions) == perm_bit
-    print(f"Actual:    {result}")
+    print(f"Inputs: {input1}, {input2}, {input3}, {input4}")
+    result = calculate_guild_perms(input1, input2, input3, input4)
+    print(f"Expected: {expected_output}")
+    print(f"Actual:   {result}")
     if result == expected_output:
         print("Pass")
         return True
@@ -54,3 +48,4 @@ if "__RUN__" in globals():
     test_cases = run_cases
 
 main()
+
